@@ -6,9 +6,9 @@
   align-items: center;
 }
 .reportCard {
-  width: 210mm; /* A4 width */
-  height: 297mm; /* A4 height */
-  padding: 2mm 6mm 6mm 6mm;
+  width: 215mm;
+  height: 279mm; /* A4 height */
+  padding: 4mm;
   background: white;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   position: relative;
