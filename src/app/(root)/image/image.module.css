@@ -1,0 +1,31 @@
+/* YourComponent.module.css */
+.container {
+  background-color: green;
+  height: auto;
+}
+
+.contents {
+  display: flex;
+  height: 100vh;
+  flex-wrap: wrap;
+  background-color: blue;
+  margin: 40px;
+  flex-direction: column;
+  animation: appear;
+  animation-timeline: view();
+}
+.imageContainer {
+  position: relative;
+  width: 50vw;
+  height: 600px;
+}
+@keyframes appear {
+  from {
+    opacity: 0.5;
+    scale: 0.5;
+  }
+  to {
+    opacity: 1;
+    scale: 1;
+  }
+}

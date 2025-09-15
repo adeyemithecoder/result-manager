@@ -1,0 +1,51 @@
+.allInput {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+.allInput label {
+  font-size: 20px;
+  display: flex;
+  align-self: self-start;
+  margin-left: 10%;
+  color: var(--color-light);
+}
+.allInput span {
+  width: 80%;
+  font-size: 15px;
+  display: none;
+  color: red;
+}
+input.focused:invalid {
+  border: 1px solid red;
+}
+
+input.focused:invalid ~ span {
+  font-size: large;
+  display: block;
+}
+.allInput .icon {
+  position: absolute;
+  right: 30px;
+  bottom: 8px;
+  font-size: 30px;
+  color: black;
+  cursor: pointer;
+}
+.each-input {
+  width: 90%;
+  height: 40px;
+  font-weight: bold;
+  font-size: 20px;
+  margin: 10px 0;
+  border-radius: 10px;
+  border: 1px solid gray;
+  outline: none;
+  text-align: center;
+  font-weight: bold;
+  font-size: 20px;
+  background-color: white;
+  color: black;
+}

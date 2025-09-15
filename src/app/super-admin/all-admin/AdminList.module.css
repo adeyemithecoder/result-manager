@@ -1,0 +1,155 @@
+.adminList {
+  width: calc(100vw - 260px);
+  overflow-x: hidden;
+}
+
+.adminList h1 {
+  margin: 15px 5px;
+  text-align: center;
+}
+
+.tableContainer {
+  overflow-x: auto;
+  width: 100%;
+}
+.adminList table {
+  margin: auto;
+  border: 2px solid black;
+  border-collapse: collapse;
+  width: 100%;
+}
+.adminList table thead tr th {
+  background-color: var(--color-primary);
+  color: black;
+  margin-bottom: 20px;
+  padding: 3px;
+  padding-bottom: 10px;
+}
+.adminList table th,
+.adminList table td {
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  text-transform: capitalize;
+  border: 2px solid var(--color-primary);
+}
+
+.adminList tbody td {
+  font-weight: bold;
+  text-align: center;
+}
+
+.userImg {
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.adminList button {
+  cursor: pointer;
+  background-color: var(--color-primary);
+  font-size: 1.1em;
+  margin: 0 5%;
+  background-color: lightgreen;
+  border-radius: 10px;
+  padding: 5px 10px;
+  border: none;
+  margin: 10px;
+}
+.adminList .delete {
+  background-color: crimson;
+  color: white;
+}
+.adminList .link {
+  text-decoration: none;
+}
+
+.schoolForm {
+  display: flex;
+  flex-direction: column;
+  height: 500px;
+  padding: 20px;
+  background-color: #f9f9f9;
+}
+
+.formGroup {
+  margin-bottom: 1rem;
+}
+.container {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-bg);
+}
+.selectContainer {
+  text-align: center;
+  width: 100%;
+}
+.container select {
+  width: 90%;
+  height: 40px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 20px;
+  margin: 10px 0;
+  border-radius: 10px;
+  font-size: 20px;
+  background-color: white;
+  color: black;
+  text-align: center;
+}
+.container select option {
+  background-color: var(--color-bg);
+  color: var(--color-white);
+  border: 1px solid gray;
+  font-size: 25px;
+  text-align: center;
+  cursor: pointer;
+}
+.container form {
+  margin: auto;
+  background-color: var(--color-bg-deep);
+  border-radius: 20px;
+  flex-direction: column;
+  display: flex;
+  justify-content: center;
+  width: 400px;
+  color: var(--color-white);
+  padding: 15px 20px;
+}
+.btnContainer {
+  text-align: center;
+}
+.container form button {
+  width: 90%;
+  height: 40px;
+  border: none;
+  text-align: center;
+  background: var(--color-bg-deep);
+  color: white;
+  border-radius: 10px;
+  border: 3px solid var(--color-primary-variant);
+  font-weight: bold;
+  font-size: 20px;
+  cursor: pointer;
+  margin-top: 10px;
+  margin-bottom: 15px;
+  transition: all 0.5s ease-in-out;
+}
+.container form button:hover {
+  background-color: var(--color-primary);
+  color: var(--color-bg);
+}
+
+.container .disabled {
+  cursor: not-allowed;
+  background-color: var(--color-fade);
+}
+.container .disabled:hover {
+  background-color: var(--color-fade);
+}
+@media screen and (max-width: 900px) {
+  .adminList {
+    width: 100vw;
+  }
+}

@@ -1,0 +1,256 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
+  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+}
+
+model School {
+  id           Int          @id @default(autoincrement())
+  fullName     String?
+  name         String?
+  principal    String?
+  signature    String?
+  headmaster   String?
+  address      String?
+  contactEmail String?
+  motto        String?
+  input        String[]
+  logo         String?
+  phoneNumber  String?
+  fees         FeeItem[]
+  students     Student[]
+  teachers     User[]
+  assignments  Assignment[]
+  classes      String[]     @default([])
+  subjects     String[]     @default([])
+  termDates    TermDate[]
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+}
+
+model User {
+  id          Int          @id @default(autoincrement())
+  username    String       @unique
+  password    String
+  name        String?
+  gender      String?
+  imageUrl    String?      @default("")
+  teacherOf   String[]     @default([])
+  classes     String[]     @default([])
+  subjects    String[]     @default([])
+  role        Role         @default(USER)
+  assignments Assignment[] @relation("TeacherAssignments")
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  schoolId    Int?
+  school      School?      @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+
+  @@index([schoolId])
+}
+
+model FeeItem {
+  id       Int    @id @default(autoincrement())
+  name     String
+  price    Float
+  school   School @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  schoolId Int
+
+  @@unique([name, schoolId])
+}
+
+model TermDate {
+  id            Int      @id @default(autoincrement())
+  schoolId      Int
+  termType      TermType
+  nextTermBegin String?
+  termBegins    String?
+  termEnds      String?
+  school        School   @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+
+  @@unique([schoolId, termType], name: "unique_school_termType")
+}
+
+model AttendanceList {
+  id             Int      @id @default(autoincrement())
+  studentId      Int
+  termType       TermType
+  session        String
+  schoolOpenDays Float    @default(0.0)
+  daysAbsent     Float    @default(0.0)
+  daysPresent    Float    @default(0.0)
+  student        Student  @relation(fields: [studentId], references: [id], onDelete: Cascade)
+
+  @@unique([studentId, termType, session], name: "unique_attendance_per_term_session")
+}
+
+model Student {
+  id                 Int                  @id @default(autoincrement())
+  schoolId           Int
+  level              String
+  variant            String?
+  gender             String?
+  formTeacherName    String?
+  formTeacherRemark  String?
+  headOfSchoolRemark String?
+  password           String
+  name               String
+  image              String?
+  age                String?
+  registrationNo     String?
+  username           String               @unique
+  surname            String
+  academicYear       String
+  studentTasks       StudentTask[]
+  school             School               @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  attendance         Attendance[]
+  attendanceList     AttendanceList[]
+  terms              Term[]
+  traitRatings       TraitRating[]
+  resultAvailability ResultAvailability[]
+  Payment            Payment[]
+
+  @@index([schoolId])
+}
+
+model Payment {
+  id        Int           @id @default(autoincrement())
+  studentId Int
+  termType  TermType
+  remark    String?
+  student   Student       @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  items     PaymentItem[]
+
+  @@unique([studentId, termType])
+}
+
+model PaymentItem {
+  id              Int       @id @default(autoincrement())
+  paymentRecordId Int
+  type            String
+  amount          Float
+  date            DateTime?
+  method          String?
+  payment         Payment   @relation(fields: [paymentRecordId], references: [id], onDelete: Cascade)
+}
+
+model ResultAvailability {
+  id        Int      @id @default(autoincrement())
+  studentId Int
+  termType  TermType
+  available Boolean  @default(false)
+  student   Student  @relation(fields: [studentId], references: [id], onDelete: Cascade)
+
+  @@unique([studentId, termType], name: "unique_student_term_result_availability")
+}
+
+model TraitRating {
+  id        Int     @id @default(autoincrement())
+  studentId Int
+  trait     String
+  rating    String
+  type      String
+  student   Student @relation(fields: [studentId], references: [id], onDelete: Cascade)
+
+  @@index([studentId], name: "idx_studentId")
+}
+
+model StudentTask {
+  id            Int        @id @default(autoincrement())
+  assignmentId  Int
+  studentId     Int
+  status        TaskStatus
+  submittedDate String?    @default("unKnown")
+  images        String[]   @default([])
+  submission    String[]
+  scores        Int[]      @default([])
+  assignment    Assignment @relation(fields: [assignmentId], references: [id], onDelete: Cascade)
+  student       Student    @relation(fields: [studentId], references: [id], onDelete: Cascade)
+
+  @@unique([assignmentId, studentId], name: "unique_assignment_per_student")
+}
+
+model Assignment {
+  id             Int           @id @default(autoincrement())
+  title          String
+  description    String?
+  instructions   String
+  teacherName    String
+  level          String
+  givenDate      DateTime
+  submissionDate DateTime
+  teacherId      Int
+  teacher        User          @relation("TeacherAssignments", fields: [teacherId], references: [id], onDelete: Cascade)
+  schoolId       Int
+  school         School        @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  questions      String[]      @default([])
+  scores         String[]      @default([])
+  images         String[]      @default([])
+  studentTasks   StudentTask[] // Relation with StudentTask
+}
+
+model Attendance {
+  id           Int      @id @default(autoincrement())
+  totalPresent Int      @default(0)
+  totalAbsent  Int      @default(0)
+  absentDates  String[]
+  presentDates String[]
+  studentId    Int
+  student      Student  @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  termType     TermType
+
+  @@unique([studentId, termType], name: "unique_attendance_per_term")
+}
+
+model Term {
+  id        Int       @id @default(autoincrement())
+  studentId Int
+  student   Student   @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  termType  TermType
+  subjects  Subject[]
+
+  @@index([studentId, termType], map: "student_term_index")
+}
+
+model Subject {
+  id          Int    @id @default(autoincrement())
+  subjectName String
+  firstCA     Int?
+  secondCA    Int?
+  thirdCA     Int?
+  fourthCA    Int?
+  fifthCA     Int?
+  sixthCA     Int?
+  project     Int?
+  note        Int?
+  rt          Int?
+  affective   Int?
+  assignment  Int?
+  exam        Int?
+  termId      Int?
+  term        Term?  @relation(fields: [termId], references: [id])
+
+  @@unique([subjectName, termId], name: "unique_subject_per_term")
+}
+
+enum Role {
+  SUPER_ADMIN
+  ADMIN
+  USER
+  ACCOUNTANT
+}
+
+enum TermType {
+  FIRST
+  SECOND
+  THIRD
+}
+
+enum TaskStatus {
+  PENDING
+  SUBMITTED
+  GRADED
+}

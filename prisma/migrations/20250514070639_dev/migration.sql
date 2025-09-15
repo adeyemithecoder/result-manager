@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "PaymentItem" ALTER COLUMN "date" DROP NOT NULL,
+ALTER COLUMN "method" DROP NOT NULL;

@@ -1,0 +1,162 @@
+.printoutContainer {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin-top: 20px;
+}
+.reportCard {
+  width: 297mm; /* A4 width */
+  height: 210mm; /* A4 height */
+  padding: 3mm;
+  background: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  position: relative;
+  color: black;
+}
+.payment {
+  text-align: center;
+}
+.payment h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  margin-top: 30px;
+}
+.selectContainer {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin: 20px;
+}
+
+.selectContainer select {
+  padding: 0.5rem;
+  border-radius: 4px;
+  font-size: 1rem;
+  outline: none;
+}
+
+.studentTableWrapper {
+  overflow-x: auto;
+}
+
+.reportCard .table td {
+  font-size: 13px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.watermark {
+  opacity: 0.3;
+  position: absolute;
+  left: 50%;
+  top: 40%;
+  transform: translate(-50%, -50%);
+}
+
+.table {
+  border-collapse: collapse;
+  width: 100%;
+}
+.reportCard .table th {
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.table,
+.table th,
+.table td {
+  border: 1px solid black;
+}
+.reportCard h4 {
+  font-size: 15px;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.reportCard p {
+  font-size: 13px;
+  font-weight: bold;
+}
+.reportCard span {
+  font-size: 13px;
+  font-weight: bold;
+}
+.header {
+  height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.header .logo {
+  margin-left: 5px;
+}
+.headerContents {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.headerContents h4:first-child {
+  font-size: 25px;
+  color: green;
+  font-weight: bold;
+}
+
+.headerContents h4:last-child {
+  margin-bottom: 10px;
+}
+.headerContents h5 {
+  font-size: 15px;
+  color: green;
+  font-weight: bold;
+}
+.headerContents h4:last-child {
+  margin-bottom: 10px;
+}
+
+.header .term {
+  margin-top: 6px;
+  margin-bottom: 6px;
+}
+
+.headerContents span {
+  color: green;
+  font-style: italic;
+}
+
+.printButton {
+  text-align: center;
+  padding-bottom: 30px;
+}
+
+.printButton button {
+  background-color: rgb(43, 201, 43);
+  padding: 10px 20px;
+  cursor: pointer;
+  margin: 10px;
+  font-weight: bold;
+  font-size: 20px;
+  border-radius: 20px;
+  outline: none;
+}
+
+.printButton button:active {
+  background-color: rgb(122, 182, 122);
+  padding: 15px 25px;
+  cursor: pointer;
+  border-radius: 20px;
+}
+
+@media print {
+  .reportCard {
+    box-shadow: none;
+    /* page-break-after: always; */
+  }
+  .printButton {
+    display: none;
+  }
+}

@@ -1,0 +1,8 @@
+.layout {
+  background-color: var(--color-bg);
+  display: flex;
+  flex-direction: column;
+}
+.allChild {
+  margin-top: 80px;
+}

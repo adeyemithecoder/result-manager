@@ -1,0 +1,75 @@
+.FileUploader {
+  background-color: var(--color-bg);
+  cursor: pointer;
+  width: 220px;
+  height: 180px;
+  margin: auto;
+  margin-top: 20px;
+  padding: 10px;
+  padding-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+}
+.FileUploader .imgContainer {
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+
+.imgContainer .img {
+  height: 100%;
+  width: 100%;
+  margin: auto;
+}
+.main .removeButton {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+.main .removeButton h4 {
+  color: white;
+  background-color: red;
+  text-align: center;
+  width: max-content;
+  border-radius: 20px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+.FileUploaderArray {
+  display: flex;
+  background-color: bisque;
+  cursor: pointer;
+}
+.FileUploaderArray .imgArrayContainer {
+  height: max-content;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+.FileUploaderArray .imgArrayContainer .addMore {
+  font-size: 80px;
+  color: green;
+}
+
+.FileUploaderArray .imgWrapper .imgArray {
+  margin: 10px;
+}
+.FileUploaderArray .text {
+  text-align: center;
+  width: 100%;
+}
+.FileUploader .text {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.FileUploader .text h3 {
+  margin: 0;
+  padding: 5px;
+}
+.FileUploader .imgContainer .img {
+  /* border-radius: 100px; */
+}

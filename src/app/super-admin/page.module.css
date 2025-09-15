@@ -1,0 +1,25 @@
+.layout {
+  background-color: var(--color-bg-deep);
+  height: auto;
+  display: flex;
+  overflow-x: hidden;
+}
+.sideBar {
+  min-width: 260px;
+  z-index: 1005;
+}
+.allChild {
+  display: flex;
+  flex-direction: column;
+  flex: 4;
+  width: 100%;
+}
+@media screen and (max-width: 900px) {
+  .allChild {
+    padding: 5px;
+    width: 100vw;
+  }
+  .sideBar {
+    position: fixed;
+  }
+}

@@ -1,0 +1,81 @@
+.eachClass-dashboard .tableContainer {
+  overflow-x: auto;
+  width: 100%;
+}
+
+.eachClass-dashboard table {
+  width: 95%;
+  margin: auto;
+  border-collapse: collapse;
+}
+
+tbody input {
+  width: 100%;
+  height: 25px;
+  font-size: 20px;
+  font-weight: bold;
+  background-color: white;
+}
+.eachClass-dashboard th,
+.eachClass-dashboard td {
+  border-color: var(--color-primary);
+  border-width: 1px 1px;
+  border-style: solid;
+}
+
+.eachClass-dashboard table thead tr th {
+  background-color: var(--color-primary);
+  color: black;
+  margin-bottom: 20px;
+  padding: 5px;
+  padding-bottom: 10px;
+}
+
+.eachClass-dashboard tbody td {
+  font-size: 12px;
+  font-weight: bold;
+}
+.eachClass-dashboard tbody .total {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.selectContainer {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 3px auto;
+  justify-content: center;
+}
+
+.selectContainer select {
+  margin: 5px;
+  margin-top: 15px;
+  outline: none;
+  cursor: pointer;
+  height: 50px;
+  width: 400px;
+  background-color: var(--color-primary);
+  border-radius: 10px;
+  font-size: 30px;
+  text-align: center;
+}
+.selectContainer select option {
+  background-color: var(--color-bg);
+  color: var(--color-white);
+  font-size: 25px;
+  text-align: center;
+}
+
+@media screen and (max-width: 900px) {
+  .eachClass-dashboard {
+    width: 100vw;
+  }
+  .eachClass-dashboard table {
+    width: 100vw;
+  }
+  .eachClass-dashboard select {
+    height: 40px;
+    width: 250px;
+    font-size: 30px;
+  }
+}
