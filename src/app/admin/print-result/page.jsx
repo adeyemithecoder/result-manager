@@ -22,7 +22,7 @@ const StudentResult = () => {
   const [selectedClass, setSelectedClass] = useState("");
 
   const { data: session, status: sessionStatus } = useSession();
-  console.log(data);
+
   useEffect(() => {
     const fetchSchool = async () => {
       try {
