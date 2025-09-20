@@ -115,7 +115,36 @@ model Student {
 
   @@index([schoolId])
 }
+model Term {
+  id        Int       @id @default(autoincrement())
+  studentId Int
+  student   Student   @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  termType  TermType
+  subjects  Subject[]
 
+  @@index([studentId, termType], map: "student_term_index")
+}
+
+model Subject {
+  id          Int    @id @default(autoincrement())
+  subjectName String
+  firstCA     Int?
+  secondCA    Int?
+  thirdCA     Int?
+  fourthCA    Int?
+  fifthCA     Int?
+  sixthCA     Int?
+  project     Int?
+  note        Int?
+  rt          Int?
+  affective   Int?
+  assignment  Int?
+  exam        Int?
+  termId      Int?
+  term        Term?  @relation(fields: [termId], references: [id])
+
+  @@unique([subjectName, termId], name: "unique_subject_per_term")
+}
 model Payment {
   id        Int           @id @default(autoincrement())
   studentId Int
@@ -205,36 +234,7 @@ model Attendance {
   @@unique([studentId, termType], name: "unique_attendance_per_term")
 }
 
-model Term {
-  id        Int       @id @default(autoincrement())
-  studentId Int
-  student   Student   @relation(fields: [studentId], references: [id], onDelete: Cascade)
-  termType  TermType
-  subjects  Subject[]
 
-  @@index([studentId, termType], map: "student_term_index")
-}
-
-model Subject {
-  id          Int    @id @default(autoincrement())
-  subjectName String
-  firstCA     Int?
-  secondCA    Int?
-  thirdCA     Int?
-  fourthCA    Int?
-  fifthCA     Int?
-  sixthCA     Int?
-  project     Int?
-  note        Int?
-  rt          Int?
-  affective   Int?
-  assignment  Int?
-  exam        Int?
-  termId      Int?
-  term        Term?  @relation(fields: [termId], references: [id])
-
-  @@unique([subjectName, termId], name: "unique_subject_per_term")
-}
 
 enum Role {
   SUPER_ADMIN

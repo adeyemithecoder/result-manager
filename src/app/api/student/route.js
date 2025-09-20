@@ -36,33 +36,3 @@ export async function GET(req) {
     );
   }
 }
-
-// export async function GET(req) {
-//   try {
-//     const { searchParams } = new URL(req.url);
-//     const schoolId = searchParams.get("schoolId");
-//     if (!schoolId) {
-//       return new NextResponse(
-//         JSON.stringify({ message: "Missing required fields", status: 400 }),
-//         { status: 400 }
-//       );
-//     }
-//     const event = await prisma.event.findMany({
-//       where: {
-//         schoolId,
-//       },
-//     });
-
-//     return new NextResponse(JSON.stringify(event), { status: 200 });
-//   } catch (err) {
-//     console.error("Error retrieving staff members:", err);
-//     return new NextResponse(
-//       JSON.stringify({
-//         message: "Failed to retrieve staff members",
-//         error: err.message,
-//         status: 500,
-//       }),
-//       { status: 500 }
-//     );
-//   }
-// }

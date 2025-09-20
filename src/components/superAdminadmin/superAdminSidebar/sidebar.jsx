@@ -3,19 +3,11 @@ import { usePathname } from "next/navigation";
 import styles from "./sidebar.module.css";
 import Link from "next/link";
 import { useContext, useEffect, useState } from "react";
-import {
-  MdFamilyRestroom,
-  MdExpandMore,
-  MdExpandLess,
-  MdAddHomeWork,
-} from "react-icons/md";
+import { MdAddHomeWork } from "react-icons/md";
 import { FaSchool, FaUserInjured } from "react-icons/fa";
-import { IoMdPersonAdd } from "react-icons/io";
-import { MdAssignmentTurnedIn } from "react-icons/md";
 import { IoDocumentsSharp, IoHome, IoPersonAddSharp } from "react-icons/io5";
 import { RiDashboard2Line } from "react-icons/ri";
 import { signOut, useSession } from "next-auth/react";
-import { FaRegRegistered } from "react-icons/fa6";
 import { GrSchedule, GrUserAdmin } from "react-icons/gr";
 import { BsBuilding, BsGear, BsKey } from "react-icons/bs"; // New icons for school and system settings
 import { Context } from "@/components/context/Context";
@@ -116,6 +108,7 @@ const SupeerAdminSidebar = () => {
                   <span>Add Classes</span>
                 </Link>
               </li>
+
               <li onClick={closeSidebar}>
                 <Link
                   className={`${styles.nav} ${
