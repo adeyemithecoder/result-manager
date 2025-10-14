@@ -9,9 +9,10 @@ import styles from "./Payment.module.css";
 const feeOptions = [
   "Previous term outstanding",
   "After school care",
-  "Uniform",
-  "Sport wear",
-  "Wednesday wear",
+  "Uniform (Primary)",
+  "Uniform (Secondary)",
+  "Sport wear (Primary)",
+  "Wednesday wear (Secondary)",
   "Friday wear",
   "Cardigan",
   "Bowtie/Tie (Primary)",
