@@ -12,6 +12,7 @@ const feeOptions = [
   "Uniform (Primary)",
   "Uniform (Secondary)",
   "Sport wear (Primary)",
+  "Wednesday wear (Primary)",
   "Wednesday wear (Secondary)",
   "Friday wear",
   "Cardigan",
