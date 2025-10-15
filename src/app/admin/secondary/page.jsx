@@ -38,6 +38,7 @@ const AllStudents = () => {
       await fetchStudents(event.target.value, selectedClass);
     }
   };
+  
   const handleClassChange = async (event) => {
     const newSelectedClass = event.target.value;
     setSelectedClass(newSelectedClass);
