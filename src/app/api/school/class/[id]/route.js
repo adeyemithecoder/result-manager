@@ -4,7 +4,9 @@ import prisma from "../../../../../../prisma/prisma";
 // DELETE function for deleting a class
 export async function DELETE(request, { params }) {
   const { id } = params;
-  const [schoolId, className] = id.split("-");
+  const [schoolId, level, variant] = id.split("-");
+
+  let className = variant ? `${level}-${variant}` : level;
 
   try {
     // Fetch the current classes

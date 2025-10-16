@@ -88,11 +88,11 @@ const Sidebar = () => {
       icon: <IoMdPrint className={styles.icon} />,
       label: "Print Result",
     },
-    {
-      path: "/admin/moveToNextClass",
-      icon: <IoMdPrint className={styles.icon} />,
-      label: "moveToNextClass",
-    },
+    // {
+    //   path: "/admin/moveToNextClass",
+    //   icon: <IoMdPrint className={styles.icon} />,
+    //   label: "moveToNextClass",
+    // },
 
     {
       path: "/admin/result-availability",
