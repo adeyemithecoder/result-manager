@@ -66,9 +66,9 @@
 
 .message {
   text-align: center;
-  color: #e63946;
+  color: white;
   font-weight: 500;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 
 .loading {
