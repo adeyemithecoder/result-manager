@@ -176,7 +176,7 @@ const EachStudentResult = ({ params }) => {
       setIsLoading(true); // Set loading state to true while fetching
       try {
         const res = await axios.get(`/api/student/${studentId}`);
-        const encodedAcademicYear = encodeURIComponent("2024/2025");
+        const encodedAcademicYear = encodeURIComponent("2025/2026");
 
         const { data } = await axios.get(
           hasMoreThanOneS(res.data.level)

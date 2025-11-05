@@ -38,7 +38,7 @@ const AllStudents = () => {
       await fetchStudents(event.target.value, selectedClass);
     }
   };
-  
+
   const handleClassChange = async (event) => {
     const newSelectedClass = event.target.value;
     setSelectedClass(newSelectedClass);
@@ -112,7 +112,6 @@ const AllStudents = () => {
           <option value="" disabled>
             Select academy year
           </option>
-          <option value="2024/2025">2024/2025</option>
           <option value="2025/2026">2025/2026</option>
         </select>
         <select
