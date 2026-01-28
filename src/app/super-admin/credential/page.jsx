@@ -16,7 +16,7 @@ const Credential = () => {
   const [termType, setTermType] = useState("FIRST");
   const { data: session, status: sessionStatus } = useSession();
   const [academicYear, setAcademicYear] = useState("");
-  const [schoolId, setSchoolId] = useState(1);
+  const [schoolId, setSchoolId] = useState(6);
 
   const fetchStudents = async (academicYear, selectedClass) => {
     if (!academicYear) return;

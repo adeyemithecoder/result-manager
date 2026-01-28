@@ -10,7 +10,6 @@ import Link from "next/link";
 const Payment = () => {
   const { data: session, status: sessionStatus } = useSession();
   const router = useRouter();
-
   const [paymentsInput, setPaymentsInput] = useState([]);
   const [students, setStudents] = useState([]);
   const [schoolClasses, setSchoolClasses] = useState([]);

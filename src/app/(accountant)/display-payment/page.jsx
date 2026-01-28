@@ -60,6 +60,7 @@ const PaymentDisplay = () => {
           termType,
         },
       });
+      console.log(data);
       setPayments(data);
     } catch (err) {
       console.error("Failed to fetch payments:", err.message);
@@ -193,7 +194,9 @@ const PaymentDisplay = () => {
                             <td>
                               #{Number(payment.paidAmount).toLocaleString()}
                             </td>
-                            <td>#{Number(payment.balance).toLocaleString()}</td>
+                            <td>
+                              # {Number(payment.balance).toLocaleString()}
+                            </td>
                           </tr>
                         );
                       }

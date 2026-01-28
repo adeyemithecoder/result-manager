@@ -9,7 +9,7 @@ export async function POST(req) {
     if (!studentId || !termType || !schoolId) {
       return NextResponse.json(
         { message: "Missing studentId, termType, or schoolId" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -22,13 +22,13 @@ export async function POST(req) {
         if (!item.type || item.amount == null) {
           return NextResponse.json(
             { message: "Each item must include type and amount" },
-            { status: 400 }
+            { status: 400 },
           );
         }
         if (!isExcluded && (!item.date || !item.method)) {
           return NextResponse.json(
             { message: `Item '${item.type}' must include date and method` },
-            { status: 400 }
+            { status: 400 },
           );
         }
       }
@@ -62,31 +62,50 @@ export async function POST(req) {
     }
 
     // ✅ Only validate payment amount limits for non-excluded items
+    // if (items?.length) {
+    //   for (const item of items) {
+    //     const isExcluded = EXCLUDED_ITEMS.includes(item.type);
+    //     if (isExcluded) continue;
+
+    //     const maxAmount = feeMap[item.type];
+    //     if (maxAmount == null) {
+    //       return NextResponse.json(
+    //         {
+    //           message: `Item type '${item.type}' is not defined in the fee structure.`,
+    //         },
+    //         { status: 400 }
+    //       );
+    //     }
+
+    //     const alreadyPaid = existingPaymentsByType[item.type] || 0;
+    //     const newTotal = alreadyPaid + item.amount;
+    //     if (newTotal > maxAmount) {
+    //       return new NextResponse(
+    //         JSON.stringify({
+    //           message: `Total payment for '${item.type}' exceeds allowed amount. Already paid: ${alreadyPaid}, trying to pay: ${item.amount}, max allowed: ${maxAmount}`,
+    //           status: 400,
+    //         })
+    //       );
+    //     }
+    //   }
+    // }
+    // ✅ Only check that the fee item exists (no amount limit anymore)
     if (items?.length) {
       for (const item of items) {
         const isExcluded = EXCLUDED_ITEMS.includes(item.type);
         if (isExcluded) continue;
-
         const maxAmount = feeMap[item.type];
         if (maxAmount == null) {
           return NextResponse.json(
             {
               message: `Item type '${item.type}' is not defined in the fee structure.`,
             },
-            { status: 400 }
+            { status: 400 },
           );
         }
 
-        const alreadyPaid = existingPaymentsByType[item.type] || 0;
-        const newTotal = alreadyPaid + item.amount;
-        if (newTotal > maxAmount) {
-          return new NextResponse(
-            JSON.stringify({
-              message: `Total payment for '${item.type}' exceeds allowed amount. Already paid: ${alreadyPaid}, trying to pay: ${item.amount}, max allowed: ${maxAmount}`,
-              status: 400,
-            })
-          );
-        }
+        // 🚫 no max amount validation
+        // payment is always accepted
       }
     }
 
@@ -118,7 +137,7 @@ export async function POST(req) {
       if (!items?.length && !remark) {
         return NextResponse.json(
           { message: "Cannot create a payment without items or remark" },
-          { status: 400 }
+          { status: 400 },
         );
       }
 
@@ -147,7 +166,7 @@ export async function POST(req) {
     console.error("Create Payment Error:", error);
     return NextResponse.json(
       { message: "Internal Server Error", error: error.message },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
@@ -160,7 +179,7 @@ export async function PUT(req) {
     if (!studentId || !termType || !schoolId) {
       return NextResponse.json(
         { message: "Missing studentId, termType, or schoolId" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -168,7 +187,7 @@ export async function PUT(req) {
 
     // ✅ Clean and validate items — amount must exist for ALL
     const cleanedItems = (items || []).filter(
-      (item) => item.amount !== null && item.amount !== 0
+      (item) => item.amount !== null && item.amount !== 0,
     );
 
     // ❌ Validate cleaned items
@@ -176,7 +195,7 @@ export async function PUT(req) {
       if (!item.type || item.amount == null) {
         return NextResponse.json(
           { message: `Each item must include a valid type and amount` },
-          { status: 400 }
+          { status: 400 },
         );
       }
 
@@ -185,7 +204,7 @@ export async function PUT(req) {
       if (!isExcluded && (!item.date || !item.method)) {
         return NextResponse.json(
           { message: `Item '${item.type}' must include date and method` },
-          { status: 400 }
+          { status: 400 },
         );
       }
     }
@@ -215,7 +234,7 @@ export async function PUT(req) {
           message:
             "Payment record not found. Cannot update non-existent record.",
         },
-        { status: 404 }
+        { status: 404 },
       );
     }
 
@@ -237,7 +256,7 @@ export async function PUT(req) {
           {
             message: `Item type '${item.type}' is not defined in the fee structure.`,
           },
-          { status: 400 }
+          { status: 400 },
         );
       }
 
@@ -253,7 +272,7 @@ export async function PUT(req) {
               newPaymentsByType[item.type]
             }, max allowed: ${maxAmount}`,
           },
-          { status: 400 }
+          { status: 400 },
         );
       }
     }
@@ -286,13 +305,13 @@ export async function PUT(req) {
 
     return NextResponse.json(
       { message: "Payment items replaced successfully." },
-      { status: 200 }
+      { status: 200 },
     );
   } catch (error) {
     console.error("Update Payment Error:", error);
     return NextResponse.json(
       { message: "Internal Server Error", error: error.message },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
@@ -309,7 +328,7 @@ export async function GET(req) {
     if (!level || !schoolId || !termType) {
       return NextResponse.json(
         { message: "Missing required query parameters" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -464,7 +483,7 @@ export async function GET(req) {
     console.error("Fetch Payments Error:", error);
     return NextResponse.json(
       { message: "Internal Server Error", error: error.message },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
@@ -479,7 +498,7 @@ export async function DELETE() {
     console.error("Delete All Payments Error:", error);
     return NextResponse.json(
       { message: "Internal Server Error", error: error.message },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
