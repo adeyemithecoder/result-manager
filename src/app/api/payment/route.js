@@ -342,7 +342,6 @@ export async function GET(req) {
     const school = await prisma.school.findUnique({
       where: { id: Number(schoolId) },
     });
-    console.log(school.classes);
     // Map fee names to their prices
     const feeMap = fees.reduce((acc, fee) => {
       acc[fee.name] = fee.price;

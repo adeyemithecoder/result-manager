@@ -38,14 +38,14 @@ const StudentResult = () => {
   const fetchStudentData = async (
     selectedTerm,
     academicYear,
-    selectedClass
+    selectedClass,
   ) => {
     if (!selectedTerm || !academicYear || !selectedClass) return;
     setLoading(true);
     try {
       const encodedAcademicYear = encodeURIComponent(academicYear);
       const { data } = await axios.get(
-        `/api/result/${encodedAcademicYear}-${session.schoolId}-${selectedTerm}-${selectedClass}`
+        `/api/result/${encodedAcademicYear}-${session.schoolId}-${selectedTerm}-${selectedClass}`,
       );
       setStudents(data);
     } catch (err) {
@@ -74,7 +74,7 @@ const StudentResult = () => {
   const generateStudentProps = (entry) => ({
     student: entry.student,
     attendanceList: entry.student.attendanceList.find(
-      (a) => a.termType === selectedTerm
+      (a) => a.termType === selectedTerm,
     ),
     school,
     subjects: entry.subjects,
@@ -144,7 +144,7 @@ const StudentResult = () => {
           <>
             {school && (
               <>
-                {school.name === "THE UKP SCHOOLS" &&
+                {/* {school.name === "THE UKP SCHOOLS" &&
                   students.map((entry, index) =>
                     entry.student?.level?.startsWith("s") ? (
                       <UkpSecondary
@@ -157,7 +157,15 @@ const StudentResult = () => {
                         {...generateStudentProps(entry)}
                       />
                     )
-                  )}
+                  )} */}
+
+                {school.name === "THE UKP SCHOOLS" &&
+                  students.map((entry, index) => (
+                    <UkpSecondary
+                      key={entry.student.id || index}
+                      {...generateStudentProps(entry)}
+                    />
+                  ))}
 
                 {school.name === "SOLID ROCK ACADEMY" &&
                   students.map((entry, index) => (

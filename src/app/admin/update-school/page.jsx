@@ -52,7 +52,19 @@ const UpdateSchool = () => {
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
 
-  if (name === "termType") {
+    // ✅ Handle checkboxes
+    if (type === "checkbox") {
+      setFormData((prev) => ({
+        ...prev,
+        input: checked
+          ? [...prev.input, name] // add
+          : prev.input.filter((item) => item !== name), // remove
+      }));
+      return;
+    }
+
+    // ✅ Handle term switching
+    if (name === "termType") {
       const selectedTerm = termDates.find((term) => term.termType === value);
       setFormData({
         ...formData,
@@ -67,12 +79,14 @@ const UpdateSchool = () => {
           ? format(new Date(selectedTerm.nextTermBegin), "yyyy-MM-dd")
           : "",
       });
-    } else {
-      setFormData((prevData) => ({
-        ...prevData,
-        [name]: value,
-      }));
+      return;
     }
+
+    // ✅ Default input handling
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   };
 
   useEffect(() => {
@@ -82,7 +96,7 @@ const UpdateSchool = () => {
         const fetchedTerms = data.termDates || [];
         const mergedTerms = defaultTerms.map((defaultTerm) => {
           const existingTerm = fetchedTerms.find(
-            (term) => term.termType === defaultTerm.termType
+            (term) => term.termType === defaultTerm.termType,
           );
           return existingTerm
             ? { ...defaultTerm, ...existingTerm }
@@ -163,7 +177,7 @@ const UpdateSchool = () => {
 
       const { data } = await axios.patch(
         `/api/school/${session.schoolId}`,
-        updatedData
+        updatedData,
       );
       alert(data.message);
     } catch (err) {
