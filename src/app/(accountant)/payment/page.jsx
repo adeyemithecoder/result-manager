@@ -61,13 +61,13 @@ const Payment = () => {
       setLoading(true);
       const encodedYear = encodeURIComponent(year);
       const { data } = await axios.get(
-        `/api/student/class/result/${term}-${session.schoolId}-${encodedYear}-${cls}`
+        `/api/student/class/result/${term}-${session.schoolId}-${encodedYear}-${cls}`,
       );
       setStudents(
         data.map((student) => {
           const termData = student.terms.find((t) => t.termType === term);
           return { ...student, currentTerm: termData?.subjects || [] };
-        })
+        }),
       );
     } catch (error) {
       console.error("Failed to fetch students:", error.message);
@@ -86,7 +86,7 @@ const Payment = () => {
     await fetchStudentData(
       nextValues.termType,
       nextValues.selectedClass,
-      nextValues.academicYear
+      nextValues.academicYear,
     );
   };
 
@@ -170,7 +170,7 @@ const Payment = () => {
       hasItems &&
       Object.entries(data.items).some(
         ([item, amount]) =>
-          !EXCLUDED_ITEMS.includes(item) && data.items[item] !== undefined
+          !EXCLUDED_ITEMS.includes(item) && data.items[item] !== undefined,
       );
     const isRemarkOnly = data?.remark && !hasRealPayments;
 
@@ -206,8 +206,6 @@ const Payment = () => {
         setSubmitting(false);
         return;
       }
-      console.log(data);
-      console.log(data.message);
       alert(`Payment recorded successfully.`);
     } catch (err) {
       console.error(err);
@@ -318,7 +316,7 @@ const Payment = () => {
                         handleTogglePaymentItem(
                           student.id,
                           e.target.value,
-                          true
+                          true,
                         );
                       }}
                       className={styles.select}
@@ -350,7 +348,7 @@ const Payment = () => {
                                   handleAmountChange(
                                     student.id,
                                     item,
-                                    parseFloat(e.target.value)
+                                    parseFloat(e.target.value),
                                   )
                                 }
                               />
@@ -361,14 +359,14 @@ const Payment = () => {
                                   handleTogglePaymentItem(
                                     student.id,
                                     item,
-                                    false
+                                    false,
                                   )
                                 }
                               >
                                 ❌
                               </button>
                             </div>
-                          )
+                          ),
                         )}
                       {studentPayments[student.id]?.remark !== undefined && (
                         <div className={styles.itemRow}>
@@ -381,7 +379,7 @@ const Payment = () => {
                               handlePaymentChange(
                                 student.id,
                                 "remark",
-                                e.target.value
+                                e.target.value,
                               )
                             }
                           />
@@ -392,7 +390,7 @@ const Payment = () => {
                               handleTogglePaymentItem(
                                 student.id,
                                 "__REMARK__",
-                                false
+                                false,
                               )
                             }
                           >
@@ -408,7 +406,7 @@ const Payment = () => {
                         handlePaymentChange(
                           student.id,
                           "method",
-                          e.target.value
+                          e.target.value,
                         )
                       }
                       className={styles.select}

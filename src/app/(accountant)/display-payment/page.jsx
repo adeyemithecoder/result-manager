@@ -60,7 +60,6 @@ const PaymentDisplay = () => {
           termType,
         },
       });
-      console.log(data);
       setPayments(data);
     } catch (err) {
       console.error("Failed to fetch payments:", err.message);

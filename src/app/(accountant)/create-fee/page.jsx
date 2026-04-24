@@ -72,6 +72,7 @@ const SchoolFeeManager = () => {
       setIsFetching(false);
     }
   };
+
   useEffect(() => {
     if (session?.schoolId) {
       fetchFees();
