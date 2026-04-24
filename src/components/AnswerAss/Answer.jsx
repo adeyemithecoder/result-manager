@@ -18,7 +18,6 @@ const AnswerAssignment = ({
   const [upload, setUpload] = useState(false);
 
   const adjustHeight = (element) => {
-    // Reset the height to a default value if the content is cleared
     element.style.height = "auto";
     if (element.value.trim() === "") {
       element.style.height = "50px"; // Set a default height, adjust as needed
