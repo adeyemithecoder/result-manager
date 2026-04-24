@@ -1,7 +1,7 @@
 "use client";
 import Class from "@/components/Class";
 import "./class-report.css";
-import { redirect, useRouter } from "next/navigation";
+import { redirect } from "next/navigation";
 import { useSession } from "next-auth/react";
 import Spinner from "@/components/Spinner/Spinner";
 
