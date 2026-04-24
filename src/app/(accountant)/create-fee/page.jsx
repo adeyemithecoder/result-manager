@@ -39,6 +39,16 @@ const feeOptions = [
   "School lesson (Reception 1 - Grade4)",
   "School lesson (Grade5)",
   "School lesson (JS1 - SS3)",
+  "Tuition fee (JS1 - JS2) 3rd term",
+  "Tuition fee (JS3) 3rd term",
+  "Tuition fee (SS1 - SS2) 3rd term",
+  "Tuition fee (SS3) 3rd term",
+  "Tuition fee (Reception 1) 3rd term",
+  "Tuition fee (Reception 2) 3rd term",
+  "Tuition fee (Nursery1) 3rd term",
+  "Tuition fee (Nursery2) 3rd term",
+  "Tuition fee (Grade1 - Grade4) 3rd term",
+  "Tuition fee (Grade5) 3rd term",
 ];
 
 const SchoolFeeManager = () => {
